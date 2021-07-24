@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+ Вход :: Lada Блог
+{% endblock %}
+{%block content %}
+<div class="About-bg">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="aboutheading">
+               <h3><span class="orange_color">Вход</span></h3>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+  <div class="section layout_padding">
+          <div class="container">
+              <div class="row margin_top_30">
+               <div class="col-md-3">
+                  <form method="post">
+                      {% csrf_token  %}
+                        {{ form.as_p }}
+                      <br><input  type="submit" value="Вход">
+                 </form>
+               </div>
+              </div>
+          </div>
+  </div>
+{% endblock %}

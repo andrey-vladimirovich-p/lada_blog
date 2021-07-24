@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+ Обратная связь :: Lada Блог
+{% endblock %}
+{%block content %}
+<div class="About-bg">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="aboutheading">
+               <h3>Обратная<span class="orange_color"> связь</span></h3>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<section class="layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="full comment_form">
+                     <form role="form" method="post">
+                     {% csrf_token %}
+                     {{ form.as_p }}<br>
+                        <div class="col-md-12">
+                           <div class="center">
+                              <button type="submit">Отправить</button>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+ Статьи :: Lada Блог
+{% endblock %}
+{%block content %}
+<!-- section -->
+<div class="About-bg">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="aboutheading">
+               <h3>Статьи<span class="orange_color"> блога</span></h3>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+      <div class="section layout_padding">
+          <div class="container">
+            {% for item in article %}
+            <div class="row margin_top_30">
+               <div class="col-md-6">
+                  <img src="{{ item.photo.url }}" alt="#" />
+               </div>
+               <div class="col-md-6">
+                  <div class="full blog_cont">
+                     <h5>{{ item.category.title }}</h5>
+                     <h4>{{ item.title }}</h4>
+                     <h5>{{ item.pub_date|date:"j E o" }}</h5>
+                     <p>{{ item.content|safe|linebreaks|truncatewords:20 }}</p>
+                      <div class="button_section full left margin_top_30">
+                            <a style="margin:0;" href="{{ item.get_absolute_url }}">Читать далее</a>
+                      </div>
+                  </div>
+               </div>
+            </div>
+            {% endfor %}
+           </div>
+      </div>
+      <!-- end section -->
+      <!-- section -->
+    <div class="button_section full center margin_top_15">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">назад</a>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">вперед</a>
+            {% endif %}
+        </span>
+    </div>
+      <!-- end section -->
+
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+ Главная страница :: Lada Блог
+{% endblock %}
+{% block content %}
+<h4>{{ cities }} {{ temp }} Град. <small>{{ weat }}</small></h4>
+   <!-- body -->
+      <!-- revolution slider -->
+      <div class="banner-slider">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-md-7">
+                  <div id="slider_main" class="carousel slide" data-ride="carousel">
+                     <!-- The slideshow -->
+                     <div class="carousel-inner">
+                        <div class="carousel-item active">
+                           <img src="{{ article_first.photo.url }}" alt="#" />
+                        </div>
+                        <div class="carousel-item">
+                           <img src="{{ article_first.photo.url }}" alt="#" />
+                        </div>
+                     </div>
+                     <!-- Left and right controls -->
+<!--                     <a class="carousel-control-prev" href="#slider_main" data-slide="prev">-->
+<!--                     <i class="fa fa-angle-left" aria-hidden="true"></i>-->
+<!--                     </a>-->
+<!--                     <a class="carousel-control-next" href="#slider_main" data-slide="next">-->
+<!--                     <i class="fa fa-angle-right" aria-hidden="true"></i>-->
+<!--                     </a>-->
+                  </div>
+               </div>
+               <div class="col-md-5">
+                  <div class="full slider_cont_section">
+                     <h4>Последняя статья</h4>
+                     <h3>{{ article_first.title|truncatewords:3 }}</h3>
+                     <p>{{ article_first.content|safe|linebreaks|truncatewords:15 }}</p>
+                     <div class="button_section">
+                        <a href="{{ article_first.get_absolute_url }}">Читать далее</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end revolution slider -->
+      <!-- section --> 
+      <div class="section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="heading">
+                     <h3>Популярные <span class="orange_color">статьи</span></h3>
+                  </div>
+               </div>
+            </div>
+            {% for popular_articles in popular_articles %}
+            <div class="{% cycle 'row' 'row margin_top_30' 'row margin_top_30' %}">
+               <div class="col-md-6">
+                  <a href="{{ popular_articles.get_absolute_url }}">
+                  <img src="{{ popular_articles.photo.url }}" alt="#" />
+                     </a>
+               </div>
+               <div class="col-md-6">
+                  <div class="full blog_cont">
+                     <a href="{{ popular_articles.get_absolute_url }}">
+                     <h5>{{ popular_articles.category.title }}</h5>
+                     <h4>{{ popular_articles.title }}</h4>
+                     <h5>{{ popular_articles.pub_date }} |
+                        Просмотры: {{ popular_articles.views }}</h5>
+                     <p>{{ popular_articles.content|safe|linebreaks|truncatewords:30 }}</p>
+                     </a>
+                  </div>
+               </div>
+            </div>
+            {% endfor %}
+         </div>
+      </div>
+      <!-- end section -->
+{% endblock %}

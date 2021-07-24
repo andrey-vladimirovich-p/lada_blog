@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+ Обо мне :: Lada Блог
+{% endblock %}
+{%block content %}
+<div class="About-bg">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="aboutheading">
+               <h3>обо <span class="orange_color">мне</span></h3>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+      <!-- section -->
+      <div class="section layout_padding">
+         <div class="container">
+
+            <div class="row">
+   <div class="col-md-6">
+                  <div class="full blog_cont">
+                     <h3>Разрешите представиться!</h3>
+                     <h5>14 июня 2021 года</h5>
+                     <p>Меня зовут Андрей! Я около 10 лет работаю в автобизнесе. Достиг своего
+                     профессионального потолка в данной сфере и решил переключится на сферу IT,
+                       т. к. без познания чего-то нового жизнь становиться скучной. Также в этой
+                       сфере есть
+                       возможность для
+                       творчества. Сначала очень пронравился язык програмирования Python, а потом его
+                       фреймворк Django. Хочу показать выставочный проект сайта блога,
+                       разработанный на Django. Статьи опубликованные в блоге по тематике
+                       автопроизодителя модели Lada. Приятного чтения!</p>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <img src="{% static 'images/marketing_img.png' %}" alt="#" />
+               </div>
+
+            </div>
+         </div>
+      </div>
+      <!-- end section -->
+{% endblock %}

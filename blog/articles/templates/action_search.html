@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+ Поиск статей :: Lada Блог
+{% endblock %}
+{%block content %}
+<div class="About-bg">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="aboutheading">
+               <h3>Поиск<span class="orange_color"> статей</span></h3>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+  <div class="section layout_padding">
+          <div class="container">
+              <div class="row margin_top_30">
+               <div class="col-md-3">
+                  <form action="{% url 'search' %}" method="get">
+                      <input type="text" name="search" id="ft_author" placeholder="по содержанию и названию"
+                             size="30">
+                      <input  type="submit" value="Найти">
+                 </form>
+               </div>
+              </div>
+          </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+ Поиск статей о запросу - {{ search_title }} :: Lada Блог
+{% endblock %}
+{%block content %}
+<!-- section -->
+<div class="About-bg">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="aboutheading">
+               <h3>Поиск<span class="orange_color"> статей</span></h3>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="section layout_padding">
+          <div class="container">
+              <div class="row margin_top_30">
+               <div class="col-md-3">
+                  <form action="{% url 'search' %}" method="get">
+                      <input type="text" name="search" id="ft_author" placeholder="по содержанию и названию"
+                             size="30">
+                      <input  type="submit" value="Найти">
+                 </form>
+               </div>
+              </div>
+          </div>
+  </div>
+      <div class="section layout_padding">
+          <div class="container">
+          {% if article %}
+            {% for item in article %}
+            <div class="row margin_top_30">
+               <div class="col-md-6">
+                  <img src="{{ item.photo.url }}" alt="#" />
+               </div>
+               <div class="col-md-6">
+                  <div class="full blog_cont">
+                     <h5>{{ item.category.title }}</h5>
+                     <h4>{{ item.title }}</h4>
+                     <h5>{{ item.pub_date|date:"j E o" }}</h5>
+                     <p>{{ item.content|safe|linebreaks|truncatewords:20 }}</p>
+                      <div class="button_section full left margin_top_30">
+                            <a style="margin:0;" href="{{ item.get_absolute_url }}">Читать далее</a>
+                      </div>
+                  </div>
+               </div>
+            </div>
+            {% endfor %}
+          {% else %}
+              <div class="row margin_top_30">
+               <div class="col-md-6">
+                  <h4>По вашему запросу статей не найдено...</h4>
+               </div>
+          {% endif %}
+           </div>
+      </div>
+      <!-- end section -->
+      <!-- section -->
+    {% if page_obj.has_other_pages %}
+    <div class="button_section full center margin_top_15">
+        <div class="col-md-6">
+            {% if page_obj.has_previous %}
+            <a class="page-numbers"
+               href="?{{ search }}page={{ page_obj.previous_page_number }}">Назад</a>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <a class="button_section full center margin_top_15"
+               href="?{{ search }}page={{ page_obj.next_page_number }}">Вперед</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+      <!-- end section -->
+  </div>
+{% endblock %}
+

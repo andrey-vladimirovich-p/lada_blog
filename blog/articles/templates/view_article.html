@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+ {{ article.title }} :: Lada Блог
+{% endblock %}
+{%block content %}
+<div class="Blog-bg">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="Blogheading">
+               <h3>Статья блога <span class="orange_color">{% if article.was_published_recently %}New!{% endif %}</span></h3>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+      <!-- section -->
+      <div class="section layout_padding blog_blue_bg light_silver">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-8 offset-md-2">
+                  <div class="full">
+                     <div class="big_blog">
+                        <img class="img-responsive" src="{{ article.photo.url }}" alt="#" />
+                     </div>
+                     <div class="blog_cont_2">
+                        <h3>{{ article.title }}</h3>
+                        <p class="sublittle">Опубликовано {{ article.pub_date|date:"j E o" }} |
+                            Просмотры: {{ article.views }} | Категория: {{ article.category.title }}</p>
+                        <p>{{ article.content|safe }}</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end section -->
+      <!-- section -->
+      <section class="layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="heading" style="padding-left: 15px;padding-right: 15px;">
+                     <h4 style="border-bottom: solid #333 1px;">Комментарии</h4>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="full comment_blog_line">
+                     <div class="row">
+
+                     {% if comments %}
+                        {% for c in comments %}
+                        <div class="col-md-1">
+                           <img src="{% static 'images/user2.png' %}" alt="#" />
+                        </div>
+                        <div class="col-md-9">
+                           <div class="full contact_text">
+                              <h3>{{ c.author }}</h3>
+                              <h4>{{ c.created_ad }}</h4>
+                              <p>{{ c.content }}</p><br>
+                           </div>
+                        </div>
+                        <div class="col-md-2">
+<!--                           <a class="reply_bt" href="#">Reply</a>-->
+                        </div>
+                        {% endfor %}
+                     {% else %}
+                        <div class="col-md-9">
+                     Комментарии не найдены! Станьте первым ;)
+                        </div>
+                     {% endif %}
+
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row margin_top_30">
+               <div class="col-md-12 margin_top_30">
+                  <div class="heading" style="padding-left: 15px;padding-right: 15px;">
+                     <h4>Добавить комментарий</h4>{{ form.non_field.errors }}
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="full comment_form">
+                     <form method="POST">
+                        {% csrf_token %}
+                        <fieldset>
+                        {% if request.user.is_authenticated %}
+                           <div class="col-md-12 margin_top_30">
+                              <div class="row">
+                              <h4>Пользователь: {{ user.username }}</h4>
+                                    {{ form.author }}
+                                    {{ form.email }}
+                                    {{ form.article }}
+                                    {{ form.created_ad }}
+                                    {{ form.content }}
+                                    {{ form.content.errors }}
+                              </div>
+                           </div>
+                            <div class="row margin_top_30">
+                                 <div class="col-md-12">
+                                    <div class="center">
+                                       <button type="submit">Отправить</button>
+                                    </div>
+                                 </div>
+                              </div>
+                        {% else %}
+                           <div class="col-md-12">
+                              <div class="row">
+                                 <div class="col-md-6">
+                                        {{ form.author }}
+                                        {{ form.author.errors }}
+                                        {{ form.email }}
+                                        {{ form.email.errors }}
+
+                                 </div>
+                                 <div class="col-md-6">
+                                     {{ form.article }}
+                                     {{ form.created_ad }}
+                                     {{ form.content }}
+                                     {{ form.content.errors }}
+                                 </div>
+                              </div>
+                               {{ form.captcha.label }}
+                               {{ form.captcha }}
+                               {{ form.captcha.errors }}
+                              <div class="row margin_top_30">
+                                 <div class="col-md-12">
+                                    <div class="center">
+                                       <button type="submit">Отправить</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        {% endif %}
+                        </fieldset>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- end section -->
+{% endblock %}
